@@ -1,3 +1,4 @@
+DFILES = D.v SfLib.v Imp.v Smallstep.v Types.v
 PFILES = $(shell find P??.v)
 EFILES = $(shell find E??_??.v)
 
