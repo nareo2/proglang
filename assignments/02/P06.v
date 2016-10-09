@@ -14,16 +14,24 @@ Require Export P05.
     for a slightly more verbose solution that considers elements of
     both lists at the same time.  (One possible solution requires
     defining a new kind of pairs, but this is not the only way.)  *)
+Print list.
 
 Fixpoint alternate (l1 l2 : natlist) : natlist :=
-  FILL_IN_HERE.
+  match l1 with
+  | [] => l2
+  | cons a b => 
+    match l2 with
+    | [] => l1
+    | cons c d => cons a (cons c (alternate b d))
+    end
+  end.
 
 Example test_alternate1:        alternate [1;2;3] [4;5;6] = [1;4;2;5;3;6].
-Proof. exact FILL_IN_HERE. Qed.
+Proof. reflexivity. Qed.
 Example test_alternate2:        alternate [1] [4;5;6] = [1;4;5;6].
-Proof. exact FILL_IN_HERE. Qed.
+Proof. reflexivity. Qed.
 Example test_alternate3:        alternate [1;2;3] [4] = [1;4;2;3].
-Proof. exact FILL_IN_HERE. Qed.
+Proof. reflexivity. Qed.
 Example test_alternate4:        alternate [] [20;30] = [20;30].
-Proof. exact FILL_IN_HERE. Qed.
+Proof. reflexivity. Qed.
 

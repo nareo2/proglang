@@ -56,7 +56,7 @@ Definition fst' (p : natprod) : nat :=
   end.
 
 Definition snd' (p : natprod) : nat :=
-  match p with
+  match p with  
   | (x,y) => y
   end.
 
@@ -109,8 +109,10 @@ Proof.
 Theorem fst_swap_is_snd : forall (p : natprod),
   fst (swap_pair p) = snd p.
 Proof.
+
   (* FILL IN HERE *) Admitted.
 (** [] *)
+Locate "..".
 
 (* ################################################################# *)
 (** * Lists of Numbers *)
@@ -1058,6 +1060,8 @@ End PartialMap.
 Inductive baz : Type :=
   | Baz1 : baz -> baz
   | Baz2 : baz -> bool -> baz.
+
+
 
 (** How _many_ elements does the type [baz] have?  (Answer in English
     or the natural language of your choice.)

@@ -116,15 +116,24 @@ Proof.
 (** Prove the following using induction. You might need previously
     proven results. *)
 
+Print "*".
+
 Theorem mult_0_r : forall n:nat,
   n * 0 = 0.
 Proof.
-  (* FILL IN HERE *) Admitted.
+  intros n.
+  induction n as [|n' IHn].
+  - reflexivity.
+  - simpl. rewrite -> IHn. reflexivity.
 
 Theorem plus_n_Sm : forall n m : nat, 
   S (n + m) = n + (S m).
 Proof.
-  (* FILL IN HERE *) Admitted.
+  intros n m.
+  induction n as [|n' IHn].
+  - reflexivity.
+  - simpl. rewrite <- IHn. reflexivity.
+  
 
 Theorem plus_comm : forall n m : nat,
   n + m = m + n.

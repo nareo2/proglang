@@ -1,5 +1,5 @@
-Require Export P03.
 
+Require Export P03.
 
 
 Theorem plus_tec3 : forall a b c : nat,
