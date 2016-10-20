@@ -8,9 +8,13 @@ Require Export P01.
     and complete the proofs below. *)
 
 Fixpoint repeat {X : Type} (n : X) (count : nat) : list X :=
-  FILL_IN_HERE.
+  match count with
+  | 0 => []
+  | S count' => cons n  (repeat n count')
+  end.
 
 Example test_repeat1:
   repeat true 2 = cons true (cons true nil).
-Proof. exact FILL_IN_HERE. Qed.
+Proof. simpl. reflexivity.  Qed.
+
 
