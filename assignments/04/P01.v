@@ -15,7 +15,7 @@ Require Export D.
     B) -> C].  This is called _uncurrying_.  With an uncurried binary
     function, both arguments must be given at once as a pair; there is
     no partial application. *)
-
+  
 (** We can define currying as follows: *)
 
 Print prod_curry.
@@ -25,7 +25,10 @@ Print prod_curry.
 
 Definition prod_uncurry {X Y Z : Type}
   (f : X -> Y -> Z) (p : X * Y) : Z :=
-  FILL_IN_HERE.
+match p with
+| pair x y => ((f x) y)
+end.
+
 
 (** (Thought exercise: before running these commands, can you
     calculate the types of [prod_curry] and [prod_uncurry]?) *)
@@ -35,18 +38,28 @@ Check @prod_uncurry.
 
 Example test_uncurry:
   prod_uncurry plus (3,7) = 10.
-Proof. exact FILL_IN_HERE. Qed.
+Proof.
+  simpl.
+  reflexivity.
+Qed.
 
 Theorem uncurry_curry : forall (X Y Z : Type) (f : X -> Y -> Z) x y,
   prod_curry (prod_uncurry f) x y = f x y.
 Proof.
-  exact FILL_IN_HERE.
+  intros X Y Z f x y.
+  unfold prod_uncurry.
+  unfold prod_curry.
+  reflexivity.
 Qed.
 
 Theorem curry_uncurry : forall (X Y Z : Type)
                                (f : (X * Y) -> Z) (p : X * Y),
   prod_uncurry (prod_curry f) p = f p.
 Proof.
-  exact FILL_IN_HERE.
+  intros X Y Z f p.
+  unfold prod_uncurry.
+  unfold prod_curry.
+  destruct p as [x y].
+  reflexivity.
 Qed.
 

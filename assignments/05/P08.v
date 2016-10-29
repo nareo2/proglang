@@ -13,11 +13,53 @@ Require Export P07.
     restate the left-hand side of [All_In].) *)
 
 Fixpoint All {T} (P : T -> Prop) (l : list T) : Prop :=
-  FILL_IN_HERE.
+match l with
+| [] => True
+| h :: t => (P h) /\ All P t
+end.
 
 Lemma All_In :
   forall T (P : T -> Prop) (l : list T),
     (forall x, In x l -> P x) <->
     All P l.
-Proof. exact FILL_IN_HERE. Qed.
-
+Proof.
+  intros T P .
+  unfold iff.
+  split.
+  - intros Hx.
+    induction l as [|h l' Hl'].
+    + simpl.
+      auto.
+    + simpl.
+      split.
+      * simpl in Hx.
+        apply Hx.
+        left.
+        reflexivity.
+      * apply Hl'.
+        intros x.
+        intros H.
+        apply Hx.
+        simpl.
+        right.
+        apply H.
+  - 
+    induction l as [|h l' Hl'].
+    + simpl.
+      intros HA.
+      intros x.
+      intros HI.
+      inversion HI.
+    + simpl.
+      intros HA.
+      inversion HA.
+      intros x.
+      intros Ho.
+      inversion Ho.
+      * rewrite <- H1. apply H. 
+      * apply Hl'.
+        { apply H0. }
+        { apply H1. }
+Qed.
+          
+    

@@ -1,0 +1,38 @@
+Require Export P04.
+Theorem filter_exercise : forall (X : Type) (test : X -> bool)
+                             (x : X) (l lf : list X),
+     filter test l = x :: lf ->
+     test x = true.
+
+
+Proof.
+  induction l as [| x' l'].
+  (* l = [] *) simpl. intros lf eq. inversion eq.
+  (* l = x' :: l' *)
+    simpl. remember (test x') as tx'.
+    destruct tx'.
+    (* tx' = true *)
+      intros lf eq. inversion eq.
+      rewrite <- H0. rewrite <- Heqtx'.
+      reflexivity.
+    (* tx' = false *) apply IHl'.
+Qed.
+
+
+Require Export P01.
+
+
+
+Example inversion_ex3 : forall (X : Type) (x y z : X) (l j : list X),
+  x :: y :: l = z :: j ->
+  y :: l = x :: j ->
+  y = z.
+Proof. 
+  intros X x y z l j.
+  intros H.
+  intros I.
+  inversion H.
+  inversion I.
+  apply H1.
+Qed.
+

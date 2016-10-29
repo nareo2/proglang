@@ -11,6 +11,8 @@ Require Export P01.
 Definition for_succ (n : c_nat) (X :Type)(f : X -> X) (x : X)  :=
 f (n X f x).
 
+Print for_succ
+
 Definition c_succ (n : c_nat) : c_nat :=
 for_succ n.
 
